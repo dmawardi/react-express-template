@@ -48,7 +48,9 @@ class AuthHandlerGenerator {
 
   //   Index function to send users to index page?
   index(req, res) {
-    console.log(req.body);
+    // User details are contained within here
+    console.log("decoded user reg: ", req.decoded);
+    // Send success to user
     res.json({
       success: true,
       message: "Index page"

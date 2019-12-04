@@ -24,6 +24,7 @@ let checkToken = (req, res, next) => {
         });
         // Else, if no error, grab decoded token
       } else {
+        //   Grab decoded token and apply details to request when proceeding
         req.decoded = decoded;
         // Allow user to proceed
         next();
