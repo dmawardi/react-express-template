@@ -5,7 +5,7 @@ import { ContextProvider } from "../Context";
 class MyProvider extends Component {
   // Below are state variables available context-wide
   state = {
-    username: "Bas Routen",
+    username: false,
     userID: false
   };
 

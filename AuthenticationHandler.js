@@ -4,11 +4,14 @@ class AuthHandlerGenerator {
   // User login handler
   login(req, res) {
     // Grab username and password from the body of the request
-    let username = req.body.username;
+    console.log("Incoming request: ", req.body);
+
+    let username = req.body.email;
     let password = req.body.password;
+    console.log("Attempted login by: " + username);
 
     // Fetch user from the DB
-    let mockedUsername = "admin";
+    let mockedUsername = "admin@gmail.com";
     let mockedPassword = "password";
 
     // If username and password are present in request body
@@ -32,14 +35,14 @@ class AuthHandlerGenerator {
         });
         // Else, if the typed username/password doesn't match
       } else {
-        res.send(403)({
+        res.status(403).send({
           success: false,
           message: "Incorrect username or password"
         });
       }
       //   Else, if no username/password detected in the request body
     } else {
-      res.send(400).json({
+      res.status(400).send({
         success: false,
         message: "Authentication failed!  Please check the request"
       });
