@@ -6,7 +6,7 @@ const AuthHandlerGenerator = require("../AuthenticationHandler");
 let handler = new AuthHandlerGenerator();
 
 // API Routes
-router.get("/api", function(req, res) {
+router.get("/api", middleware.checkToken, function(req, res) {
   res.send("You are hitting the API request endpoint (Method: GET)");
 });
 
@@ -14,7 +14,7 @@ router.get("/api", function(req, res) {
 // Login
 router.post("/login", handler.login);
 // If user has token, send to index
-router.get("/", middleware.checkToken, handler.index);
+router.get("/auth", middleware.checkToken, handler.index);
 
 // If no API routes are hit, send the React app
 router.use("/", function(req, res) {

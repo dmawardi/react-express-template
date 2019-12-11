@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FormGroup from "../FormGroup";
 let axios = require("axios");
+// import
 
 var accountForms = {
   // Login input data
@@ -81,7 +82,11 @@ class Form extends Component {
     console.log(this.state.formData);
     // Send login request using userFunctions
     axios.post("/login", this.state.formData).then(response => {
-      console.log(response);
+      console.log("Token after login", response.data.token);
+      if (response.data.success) {
+        console.log("successful login.  Assigning cookie");
+        this.props.cookies.set("authorization", response.data.token);
+      }
     });
   };
 

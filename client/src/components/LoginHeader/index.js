@@ -2,7 +2,13 @@ import React, { useContext } from "react";
 import Context from "../Context";
 import { Link } from "react-router-dom";
 
-function LoginHeader() {
+function LoginHeader(props) {
+  const handleLogOut = e => {
+    e.preventDefault();
+    console.log(props.cookies);
+    props.cookies.remove("authorization");
+  };
+
   const contextState = useContext(Context);
   console.log(contextState);
   // If user is not logged in:
@@ -21,6 +27,9 @@ function LoginHeader() {
             Login
           </button>
         </Link>
+        <button onClick={handleLogOut} type="button" className="btn btn-info">
+          Logout
+        </button>
       </div>
     );
     // Else, display Logged in as and Log out button
