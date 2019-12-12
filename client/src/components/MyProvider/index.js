@@ -5,19 +5,30 @@ import { ContextProvider } from "../Context";
 class MyProvider extends Component {
   // Below are state variables available context-wide
   state = {
-    username: false,
+    isLoggedIn: false,
     userID: false
   };
 
+  componentDidMount() {
+    // const [cookies, setCookie, removeCookie] = useCookies(["cookie-name"]);
+    // console.log("printing cookies on mount: ", cookies);
+  }
+
   render() {
+    // console.log("Rendering MyProvider. Printing cookies", this.props);
     return (
       // Accessible using context as object with three values: {state, setUsername(), setUserId()}
       <ContextProvider
         value={{
           state: this.state,
-          setUsername: newNameToSet => {
+          toggleLogin: newNameToSet => {
             this.setState({
-              username: newNameToSet
+              isLoggedIn: true
+            });
+          },
+          toggleLogout: newNameToSet => {
+            this.setState({
+              isLoggedIn: false
             });
           },
           setUserId: newIdToSet => {

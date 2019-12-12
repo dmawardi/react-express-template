@@ -1,6 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import FormGroup from "../FormGroup";
+import Context from "../Context";
 let axios = require("axios");
+
 // import
 
 var accountForms = {
@@ -79,13 +81,18 @@ class Form extends Component {
   // Handle login submission
   handleLoginSubmit = e => {
     e.preventDefault();
+    // const contextState = useContext(Context);
+
     console.log(this.state.formData);
     // Send login request using userFunctions
     axios.post("/login", this.state.formData).then(response => {
       console.log("Token after login", response.data.token);
       if (response.data.success) {
         console.log("successful login.  Assigning cookie");
+        // Set cookies with authorization token
         this.props.cookies.set("authorization", response.data.token);
+        // Assign context
+        this.context.toggleLogin();
       }
     });
   };
@@ -112,5 +119,7 @@ class Form extends Component {
     );
   }
 }
+
+Form.contextType = Context;
 
 export default Form;

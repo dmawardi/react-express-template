@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LoginHeader from "../LoginHeader";
 import { Link } from "react-router-dom";
+import Context from "../Context";
 import axios from "axios";
 
 class Navbar extends Component {
@@ -12,7 +13,25 @@ class Navbar extends Component {
     });
   };
 
+  // Check on cookie presence and toggle login status if found
+  checkCurrentLoginStatusBasedOnCookie() {
+    // If it's found that there is a cookie
+    if (this.props.cookies.get("authorization")) {
+      // Toggle login status
+      this.context.toggleLogin();
+    }
+
+    console.log("This cookie check: ", this.props.cookies.get("authorization"));
+  }
+
+  componentDidMount() {
+    // Before mounting check login status
+    this.checkCurrentLoginStatusBasedOnCookie();
+  }
+
   render() {
+    // Check login status whenever rendering
+    // this.checkCurrentLoginStatusBasedOnCookie();
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
@@ -47,5 +66,8 @@ class Navbar extends Component {
     );
   }
 }
+
+// Make the navbar have access to the context
+Navbar.contextType = Context;
 
 export default Navbar;
