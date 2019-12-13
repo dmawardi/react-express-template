@@ -1,8 +1,5 @@
+// Import dependencies
 let jwt = require("jsonwebtoken");
-
-function extractTokenFromCookie(cookies) {
-  // cookies.split(";").split
-}
 
 // Middleware function to check the json web token of user
 let checkToken = (req, res, next) => {
@@ -29,13 +26,7 @@ let checkToken = (req, res, next) => {
     console.error("Error encountered, proceeding: ", err);
   }
 
-  // If by chance the token starts with Bearer
-  // if (token && token.startsWith("Bearer ")) {
-  //   // Remove bearer text from string
-  //   token = token.slice(7, token.length);
-  // }
-
-  // Pertform authentication check if token present
+  // Perform authentication check if token present
   if (result) {
     jwt.verify(result, process.env.AUTH_SECRET, (err, decoded) => {
       // If an error occurred

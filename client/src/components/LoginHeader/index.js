@@ -1,19 +1,14 @@
+// Import dependencies
 import React, { useContext } from "react";
 import Context from "../Context";
 import { Link } from "react-router-dom";
 
+// Login Header
 function LoginHeader(props) {
   const contextState = useContext(Context);
   console.log("props for login header", props);
 
-  // If it's found that there is a cookie
-  // if (props.cookies.get("authorization")) {
-  //   // Toggle login status
-  //   contextState.toggleLoginStatus();
-  // }
-
-  console.log(props.cookies.get("authorization"));
-
+  // logout handler
   const handleLogOut = e => {
     e.preventDefault();
     console.log(props.cookies);
@@ -21,7 +16,6 @@ function LoginHeader(props) {
     contextState.toggleLogout();
   };
 
-  console.log(contextState);
   // If user is not logged in:
   if (!contextState.state.isLoggedIn) {
     return (
@@ -40,7 +34,7 @@ function LoginHeader(props) {
         </Link>
       </div>
     );
-    // Else, display Logged in as and Log out button
+    // Else, display Logged in info and Log out button
   } else {
     return (
       <div>

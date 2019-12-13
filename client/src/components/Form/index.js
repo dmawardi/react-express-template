@@ -57,8 +57,10 @@ var accountForms = {
 };
 
 class Form extends Component {
+  // Provide state to allow form to be used for other purposes
   state = {
     formFields: accountForms.login,
+    // Formdata is populated on change
     formData: {}
   };
 
@@ -71,7 +73,7 @@ class Form extends Component {
     // Copy current form data for appending
     let temporaryState = this.state.formData;
 
-    // Create new value within temporary state and set
+    // Create new value within temporary state and set state value
     temporaryState[name] = value;
     this.setState({
       formData: temporaryState
@@ -81,17 +83,17 @@ class Form extends Component {
   // Handle login submission
   handleLoginSubmit = e => {
     e.preventDefault();
-    // const contextState = useContext(Context);
 
     console.log(this.state.formData);
     // Send login request using userFunctions
     axios.post("/login", this.state.formData).then(response => {
       console.log("Token after login", response.data.token);
+      // if response was successful
       if (response.data.success) {
         console.log("successful login.  Assigning cookie");
         // Set cookies with authorization token
         this.props.cookies.set("authorization", response.data.token);
-        // Assign context
+        // Toggle login
         this.context.toggleLogin();
       }
     });
@@ -101,12 +103,13 @@ class Form extends Component {
     return (
       <div>
         <form>
-          {/* //   Iterate through state's formFields variable */}
+          {/* //   Iterate through state's formFields variable and create form fields*/}
           {this.state.formFields.map(item => {
             return (
               <FormGroup formItem={item} handleChange={this.handleFormChange} />
             );
           })}
+          {/* Submit button */}
           <button
             type="submit"
             className="btn btn-primary"

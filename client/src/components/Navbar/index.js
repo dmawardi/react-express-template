@@ -1,9 +1,11 @@
+// Import dependencies
 import React, { Component } from "react";
 import LoginHeader from "../LoginHeader";
 import { Link } from "react-router-dom";
 import Context from "../Context";
 import axios from "axios";
 
+// Navbar
 class Navbar extends Component {
   getAPITest = () => {
     console.log("Getting API Test\nCookies: ");
@@ -31,9 +33,9 @@ class Navbar extends Component {
 
   render() {
     // Check login status whenever rendering
-    // this.checkCurrentLoginStatusBasedOnCookie();
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        {/* Make brand redirect to home */}
         <Link className="navbar-brand" to="/">
           React Template
         </Link>
@@ -50,6 +52,7 @@ class Navbar extends Component {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
+          {/* Link List */}
           <ul className="navbar-nav">
             <li className="nav-item active">
               <Link className="nav-link" to="/">
@@ -59,6 +62,7 @@ class Navbar extends Component {
             <li className="nav-item">
               <button onClick={this.getAPITest}>Get Test</button>
             </li>
+            {/* Login Display status */}
             <LoginHeader cookies={this.props.cookies} />
           </ul>
         </div>

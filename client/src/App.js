@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import "./components/MyProvider";
+// Context Provider
 import MyProvider from "./components/MyProvider";
+// Components
 import Navbar from "./components/Navbar";
 import Form from "./components/Form";
+// Router
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+// Cookies
 import { withCookies } from "react-cookie";
 
 class App extends Component {
@@ -15,6 +19,7 @@ class App extends Component {
       <MyProvider>
         <Router>
           <div className="App">
+            {/* Navbar Router section */}
             <Switch>
               <Route
                 path="/"
@@ -23,6 +28,7 @@ class App extends Component {
                 }}
               ></Route>
             </Switch>
+            {/* Body Router section */}
             <Switch>
               <Route
                 exact
@@ -61,4 +67,5 @@ class App extends Component {
   }
 }
 
+// Export encased withCookies to provide access to cookies throughout app
 export default withCookies(App);
