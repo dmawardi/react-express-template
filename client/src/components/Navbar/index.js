@@ -3,18 +3,9 @@ import React, { Component } from "react";
 import LoginHeader from "../LoginHeader";
 import { Link } from "react-router-dom";
 import Context from "../Context";
-import axios from "axios";
 
 // Navbar
 class Navbar extends Component {
-  getAPITest = () => {
-    console.log("Getting API Test\nCookies: ");
-    console.log(this.props.cookies);
-    axios.get("auth/").then(response => {
-      console.log("Authentication response", response.data);
-    });
-  };
-
   // Check on cookie presence and toggle login status if found
   checkCurrentLoginStatusBasedOnCookie() {
     // If it's found that there is a cookie
@@ -22,8 +13,6 @@ class Navbar extends Component {
       // Toggle login status
       this.context.toggleLogin();
     }
-
-    console.log("This cookie check: ", this.props.cookies.get("authorization"));
   }
 
   componentDidMount() {
@@ -59,9 +48,7 @@ class Navbar extends Component {
                 Home <span className="sr-only">(current)</span>
               </Link>
             </li>
-            <li className="nav-item">
-              <button onClick={this.getAPITest}>Get Test</button>
-            </li>
+
             {/* Login Display status */}
             <LoginHeader cookies={this.props.cookies} />
           </ul>
